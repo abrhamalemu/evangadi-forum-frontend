@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,9 +20,9 @@ const Login = () => {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
   // Store user data in localStorage
@@ -36,16 +36,19 @@ const Login = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!email || !password) {
       toast.error("Please fill all the fields");
       return;
     }
-    
+
     setLoading(true);
-    
+
     try {
-      const { data } = await axios.post("/user/login", { email, password });
+      const { data } = await axios.post(
+        "https://evangadi-3rd-project-12.onrender.com/user/login",
+        { email, password }
+      );
       console.log("Login response:", data);
 
       // Destructure the response
@@ -96,7 +99,7 @@ const Login = () => {
                   disabled={loading}
                 />
               </div>
-              
+
               {/* Password */}
               <div className={`${classes.form_row} ${classes.input_with_icon}`}>
                 <input
@@ -149,11 +152,7 @@ const Login = () => {
               </div>
 
               {/* Submit */}
-              <button 
-                type="submit" 
-                className={classes.btn}
-                disabled={loading}
-              >
+              <button type="submit" className={classes.btn} disabled={loading}>
                 {loading ? "Logging in..." : "Submit"}
               </button>
 
