@@ -45,10 +45,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(
-        "https://evangadi-3rd-project-12.onrender.com/user/login",
-        { email, password }
-      );
+      const { data } = await axios.post("/user/login", { email, password });
       console.log("Login response:", data);
 
       // Destructure the response
