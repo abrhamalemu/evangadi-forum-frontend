@@ -39,8 +39,12 @@ const Register = () => {
     } catch (error) {
       console.log(
         "Registration failed:",
-        error.response?.data || error.message
+        // error.response?.data || error.message
+        error
       );
+      res
+        .status(500)
+        .json({ error: "Database connection failed", details: error.message });
       toast.error(
         error.response?.data.error ||
           error.response?.data.message ||
